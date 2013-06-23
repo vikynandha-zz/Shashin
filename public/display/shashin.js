@@ -90,6 +90,7 @@ jQuery(document).ready(function($) {
         })
 
         event.preventDefault();
+        window.location.hash = nextTableId;
     });
 
     $('.shashinPhotoGroups').delegate('.shashinPrevious', 'click', function(event) {
@@ -106,8 +107,8 @@ jQuery(document).ready(function($) {
         event.preventDefault();
     });
 
-    var handleAlbumThumbLinkClick = function(event) {
-        uniqueThumbnailDivId = '#' + $(this).attr('id');
+    var showAlbum = function(event) {
+        var uniqueThumbnailDivId = window.location.hash;
 
         // to prevent the photos showing up twice if the user double-clicks
         if ($(uniqueThumbnailDivId).data('clicked')) {
@@ -136,8 +137,6 @@ jQuery(document).ready(function($) {
             shashinParentAlbumTitle: albumTitle,
             shashinParentTableStyle: parentTableStyle
         };
-
-        window.location.hash = uniqueThumbnailDivId;
 
         $.get(shashinJs.ajaxUrl, dataToSend, function(dataReceived) {
             $(parentTable).fadeOut('slow', function() {
@@ -192,7 +191,14 @@ jQuery(document).ready(function($) {
         event.preventDefault();
     };
 
-    $('.shashinThumbnailDiv').delegate('.shashinAlbumThumbLink', 'click', handleAlbumThumbLinkClick);
+    var setWindowHash = function() {
+        window.location.hash = '#' + $(this).attr('id');
+        event.preventDefault();
+    };
+
+    $('.shashinThumbnailDiv').delegate('.shashinAlbumThumbLink', 'click', setWindowHash);
+
+    $(window).bind('hashchange',showAlbum);
 
     $('.shashinPhotoGroups').delegate('.shashinReturn', 'click', function(event) {
         $('.shashinAlbumThumbLink').data('clicked', false); // ok to click an album thumbnail again
@@ -204,7 +210,7 @@ jQuery(document).ready(function($) {
             $(selectedAlbumPhotosId).remove();
         })
 
-        event.preventDefault();
+        //event.preventDefault();
     });
 
     // for backward compatibility with Shashin 2 album links
