@@ -112,7 +112,7 @@ jQuery(document).ready(function($) {
         var $this = $(uniqueThumbnailDivId);
 
         // to prevent the photos showing up twice if the user double-clicks
-        if ($(uniqueThumbnailDivId).data('clicked')) {
+        if (uniqueThumbnailDivId === '#' || $(uniqueThumbnailDivId).data('clicked')) {
             return false;
         }
 
