@@ -72,7 +72,7 @@ abstract class Public_ShashinPhotoDisplayer extends Public_ShashinDataObjectDisp
             . '">' . PHP_EOL;
         $this->caption .= '<div class="shashinFancyboxCaption">' . PHP_EOL;
         $this->caption .= '<div class="shashinFancyboxCaptionClose">'
-            . '<a href="#" onclick="jQuery.fancybox.close();">'
+            . '<a href="#" onclick="jQuery.fancybox.close();return false;">'
             . '<img alt="Close" src="'
             . $this->functionsFacade->getPluginsUrl('/display/', __FILE__)
             . 'fancybox/closelabel.gif" />'
