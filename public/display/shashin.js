@@ -108,11 +108,12 @@ jQuery(document).ready(function($) {
     });
 
     var showAlbum = function(event) {
-        var uniqueThumbnailDivId = window.location.hash;
+        var uniqueThumbnailDivId = window.location.hash.replace( /_$/, '' );
         var $this = $(uniqueThumbnailDivId);
 
         // to prevent the photos showing up twice if the user double-clicks
-        if (uniqueThumbnailDivId === '#' || $(uniqueThumbnailDivId).data('clicked')) {
+        if (!uniqueThumbnailDivId || uniqueThumbnailDivId == '#' ||
+            $(uniqueThumbnailDivId).data('clicked')) {
             return false;
         }
 
@@ -193,7 +194,7 @@ jQuery(document).ready(function($) {
     };
 
     var setWindowHash = function() {
-        window.location.hash = '#' + $(this).attr('id');
+        window.location.hash = '#' + $(this).attr('id') + '_';
         event.preventDefault();
     };
 
