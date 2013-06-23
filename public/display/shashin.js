@@ -109,6 +109,7 @@ jQuery(document).ready(function($) {
 
     var showAlbum = function(event) {
         var uniqueThumbnailDivId = window.location.hash;
+        var $this = $(uniqueThumbnailDivId);
 
         // to prevent the photos showing up twice if the user double-clicks
         if ($(uniqueThumbnailDivId).data('clicked')) {
@@ -117,17 +118,17 @@ jQuery(document).ready(function($) {
 
         $(uniqueThumbnailDivId).data('clicked', true);
 
-        var parentTable = $(this).closest('table');
+        var parentTable = $this.closest('table');
         var parentTableIdParts = $(parentTable).attr('id').split('_');
         var parentTableStyle = $(parentTable).attr('style');
-        var linkIdParts = $(this).attr('id').split('_');
+        var linkIdParts = $this.attr('id').split('_');
 
         if (linkIdParts[1] == 'img') {
-            var albumTitle = $(this).children('img').attr('alt');
+            var albumTitle = $this.children('img').attr('alt');
         }
 
         else if (linkIdParts[1] == 'caption') {
-            var albumTitle = $(this).text();
+            var albumTitle = $this.text();
         }
 
         var dataToSend = {
