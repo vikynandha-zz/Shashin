@@ -201,6 +201,9 @@ jQuery(document).ready(function($) {
     $('.shashinThumbnailDiv').delegate('.shashinAlbumThumbLink', 'click', setWindowHash);
 
     $(window).bind('hashchange',showAlbum);
+    if (window.location.hash && window.location.hash != '#' ) {
+        window.trigger('hashchange');
+    }
 
     $('.shashinPhotoGroups').delegate('.shashinReturn', 'click', function(event) {
         $('.shashinAlbumThumbLink').data('clicked', false); // ok to click an album thumbnail again
